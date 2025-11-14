@@ -1,11 +1,12 @@
-import { GalleryVerticalEnd } from "lucide-react"
+import { GalleryVerticalEnd } from "lucide-react";
 
-import { LoginForm } from "@/components/login-form"
-import { Metadata } from "next"
+import { LoginForm } from "@/components/login-form";
+import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "File system - Login"
-}
+  title: "File system - Login",
+};
 
 export default function LoginPage() {
   return (
@@ -17,8 +18,11 @@ export default function LoginPage() {
           </div>
           File System
         </a>
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
-  )
+  );
 }
+

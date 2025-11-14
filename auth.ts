@@ -4,13 +4,31 @@ import GoogleProvider from "./app/api/auth/providers/google-provider";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   cookies: {
     sessionToken: {
-      name: "session-token",
+      name: "sys-session-token",
       options: {
         httpOnly: true,
         sameSite: "lax",
-        path: "/"
-      }
-    }
+        path: "/",
+      },
+    },
+    callbackUrl: {
+      name: "sys-cb-url",
+      options: {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        path: "/",
+      },
+    },
+    csrfToken: {
+      name: "sys-csrf-token",
+      options: {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+        path: "/",
+      },
+    },
   },
   providers: [GoogleProvider],
   pages: {

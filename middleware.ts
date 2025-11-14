@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const publicRoutes = ["/login"];
-  const isAuthenticated = request.cookies.get("session-token")?.value;
+  const isAuthenticated = request.cookies.get("sys-session-token")?.value;
 
   const isPublicRoute: boolean = publicRoutes.some((route) =>
     request.nextUrl.pathname.startsWith(route)

@@ -1,6 +1,11 @@
 import { GalleryVerticalEnd } from "lucide-react"
 
 import { LoginForm } from "@/components/login-form"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "File system - Login"
+}
 
 export default function LoginPage() {
   return (

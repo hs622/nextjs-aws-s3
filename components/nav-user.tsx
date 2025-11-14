@@ -21,7 +21,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { SignOut } from "@/app/actions";
 
-export function NavUser() {
+const NavUser = () => {
   const { data: session } = useSession();
   const { isMobile } = useSidebar();
 
@@ -34,12 +34,12 @@ export function NavUser() {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 rounded-full">
                 <AvatarImage
                   src={session?.user?.image as string}
                   alt={session?.user?.name as string}
                 />
-                <AvatarFallback className="rounded-lg">
+                <AvatarFallback className="rounded-full">
                   {
                     session?.user?.name
                       ?.split(" ")
@@ -67,12 +67,12 @@ export function NavUser() {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+                <Avatar className="h-8 w-8 rounded-full">
                   <AvatarImage
                     src={session?.user?.image as string}
                     alt={session?.user?.name as string}
                   />
-                  <AvatarFallback className="rounded-lg">
+                  <AvatarFallback className="rounded-full">
                     {session?.user?.name
                       ?.split(" ")
                       .map((n) => n[0])
@@ -116,3 +116,6 @@ export function NavUser() {
   );
 }
 
+export {
+  NavUser
+}

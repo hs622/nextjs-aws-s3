@@ -10,7 +10,7 @@ import {
 } from "./ui/breadcrumb";
 import { Separator } from "./ui/separator";
 import { SidebarTrigger } from "./ui/sidebar";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 
 const ConsoleHeader = () => {
@@ -28,21 +28,23 @@ const ConsoleHeader = () => {
           <Breadcrumb>
             <BreadcrumbList>
               {pathname.split("/").map((segment, index) => (
-                <BreadcrumbItem key={index}>
-                  <BreadcrumbLink
-                    href={`http://localhost:3000${pathname
-                      .split("/")
-                      .slice(0, index + 1)
-                      .join("/")}`}
-                  >
-                    {segment
-                      ? segment.at(0)?.toUpperCase() + segment.slice(1)
-                      : ""}
-                  </BreadcrumbLink>
-                  {index != 0 && index < pathname.split("/").length - 1 && (
+                <Fragment key={index}>
+                  {index > 1 && (
                     <BreadcrumbSeparator className="hidden md:block" />
                   )}
-                </BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink
+                      href={`http://localhost:3000${pathname
+                        .split("/")
+                        .slice(0, index + 1)
+                        .join("/")}`}
+                    >
+                      {segment
+                        ? segment.at(0)?.toUpperCase() + segment.slice(1)
+                        : ""}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </Fragment>
               ))}
             </BreadcrumbList>
           </Breadcrumb>

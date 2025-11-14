@@ -2,8 +2,9 @@
 
 import { signIn, signOut } from "@/auth";
 
-export async function SignInWithGoogle() {
-  await signIn("google", { redirectTo: "/console" });
+export async function SignInWithGoogle(searchParams: string | null) {
+  const redirectionPath = searchParams || "/console";
+  await signIn("google", { redirectTo: redirectionPath });
 }
 
 export async function SignInWithCredentials(data: FormData) {
@@ -67,3 +68,4 @@ export async function DeleteAccount() {
   // Implement your account deletion logic here
   // For example, you might want to delete the user's account from your database
 }
+

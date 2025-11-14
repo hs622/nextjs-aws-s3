@@ -1,33 +1,29 @@
-// import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// export function middleware(request: NextRequest) {
-// console.log(`Host IP: ${request.headers.get("Host")}`);
+export function middleware(request: NextRequest) {
+  const publicRoutes = ["/login"];
+  const isAuthenticated = request.cookies.get("authjs.session-token")?.value;
 
-// const browserName = request.headers.get("sec-ch-ua")
-// ?.split(";")
-// ?.map(item => item.trim().replace(/"/g, ''))
-// // i at the end of the regex makes it case-insensitive
-// ?.find(item => item.search(/Google Chrome|Firefox|Safari|Edge/i) !== -1);
+  const isPublicRoute: boolean = publicRoutes.some((route) =>
+    request.nextUrl.pathname.startsWith(route)
+  );
 
-// console.log(`Browser: ${browserName}`);
-// console.log(`System: ${request.headers.get("sec-ch-ua-platform")}`);
+  if (!isAuthenticated && !isPublicRoute) {
+    const loginUrl = new URL("/login", request.url);
 
-// console.log(`user ip: ${request.headers.get("x-forwarded-for")}`);
-// console.log(`protocol: ${request.headers.get("x-forwarded-proto")}`);
+    loginUrl.searchParams.set("redirect", encodeURI(request.nextUrl.pathname));
+    return NextResponse.redirect(loginUrl);
+  }
 
-// request.headers.forEach((value, key) => console.log(`${key}: ${value}`));
+  if(isAuthenticated && isPublicRoute) {
+    return NextResponse.redirect(new URL("/", request.url))
+  }
 
-// console.log(`Cookie: ${request.headers.get("Cookie")}`);
-// console.log(`Cookie: ${request.headers.get("Cookie")}`);
-
-//   return NextResponse.redirect(new URL("/login", request.url));
-// }
-
-export { auth as middleware } from "./auth";
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [
-    "/console/:path", 
-  ]
+    "/((?!api|.well-known|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
 };
-

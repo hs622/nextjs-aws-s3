@@ -58,7 +58,10 @@ const ProductTablePage = () => {
 
   useEffect(() => {
     dispatch(fetchProducts({
-      limit: 55
+      limit: 55,
+      properties: [
+          "id","description","brand","availabilityStatus","title","sku","stock"
+      ]
     }))
   }, [dispatch])
 

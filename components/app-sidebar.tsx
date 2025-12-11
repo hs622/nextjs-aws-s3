@@ -1,13 +1,19 @@
 "use client";
 
 import {
+  BadgeQuestionMark,
   BookOpen,
+  ChartNoAxesGantt,
+  ClipboardList,
   Folder,
   Frame,
   GalleryVerticalEnd,
+  MailQuestionMark,
   Map,
+  Megaphone,
   PieChart,
   Settings2,
+  UsersRound,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -26,13 +32,38 @@ import { ComponentProps } from "react";
 const data = {
   navMain: [
     {
-      title: "Console",
+      title: "Home",
       url: "/console",
       icon: GalleryVerticalEnd,
     },
     {
+      title: "Customers",
+      url: "/customers",
+      icon: UsersRound,
+    },
+    {
+      title: "Products",
+      url: "/products",
+      icon: ChartNoAxesGantt,
+    },
+    {
+      title: "Orders",
+      url: "/orders",
+      icon: ClipboardList,
+    },
+    {
+      title: "Campaigns",
+      url: "/campaigns",
+      icon: Megaphone,
+    },
+    {
+      title: "Inquiries",
+      url: "/inquiries",
+      icon: MailQuestionMark,
+    },
+    {
       title: "File System",
-      url: "/console/file-system",
+      url: "/file-system",
       icon: Folder,
     },
     {

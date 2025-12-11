@@ -19,7 +19,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url))
   }
 
-  return NextResponse.next();
+  const requestHeader = new Headers(request.headers);
+  requestHeader.set("x-url", request.url)
+  requestHeader.set("x-pathname", request.nextUrl.pathname)
+  requestHeader.set("x-search", request.nextUrl.search)
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeader
+    }
+  });
 }
 
 export const config = {

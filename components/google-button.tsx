@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { SignInWithGoogle } from "@/app/actions";
+import { SignInWithGoogle } from "@/app/actions/auth";
 import { LoaderCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";

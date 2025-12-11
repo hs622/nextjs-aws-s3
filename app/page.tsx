@@ -1,4 +1,10 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <div className="font-3xl">With S3 File-system</div>;
+  return (
+    <div >
+      <Link href={"/console"} className="font-3xl">console</Link>
+    </div>
+  );
 }
 

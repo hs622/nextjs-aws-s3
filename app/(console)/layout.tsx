@@ -22,7 +22,9 @@ export default function ConsoleLayout({
       <AppSidebar />
       <SidebarInset>
         <ConsoleHeader />
-        {children}
+        <div className="px-2">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );

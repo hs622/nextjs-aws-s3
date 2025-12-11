@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { SignOut } from "@/app/actions";
+import { SignOut } from "@/app/actions/auth";
 
 const NavUser = () => {
   const { data: session } = useSession();

@@ -11,16 +11,18 @@ interface props<TData> {
   data: TData[],
   columns: ColumnDef<TData>[],
   filters?: [],
-  numberOfRecords?: number
+  numberOfRecords?: number,
+  onRowClick?: (row: TData) => void
 }
 
 const DataTableBody = <TData,>({
   data,
   columns,
-  numberOfRecords
+  numberOfRecords,
+  onRowClick
 }: props<TData>) => {
 
-  const [pagination, setPagniation] = useState<PaginationState>({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: numberOfRecords || 20
   })
@@ -31,7 +33,7 @@ const DataTableBody = <TData,>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onPaginationChange: setPagniation,
+    onPaginationChange: setPagination,
     state: {
       pagination
     },
@@ -43,7 +45,7 @@ const DataTableBody = <TData,>({
       <div className="border rounded-md">
         <Table>
           <DataTableHeader table={table} />
-          <DataTableCell table={table} columns={columns.length} />
+          <DataTableCell table={table} columns={columns.length} onRowClick={onRowClick} />
         </Table>
       </div>
       {!(table.getState().pagination.pageSize >= data.length) && (

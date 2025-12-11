@@ -16,6 +16,7 @@ interface InitialState {
   status: "idle" | "loading" | "failed";
   error: string | null;
   selectedItem: [] | null;
+  selectedProduct: IProduct | null;
 }
 
 const initialState: InitialState = {
@@ -24,7 +25,8 @@ const initialState: InitialState = {
   data: null,
   status: "idle",
   error: null,
-  selectedItem: null
+  selectedItem: null,
+  selectedProduct: null
 };
 
 const productSlice = createSlice({
@@ -36,6 +38,9 @@ const productSlice = createSlice({
     },
     clearItem: (state) => {
       state.selectedItem = null
+    },
+    setSelectedProduct: (state, action: PayloadAction<IProduct>) => {
+      state.selectedProduct = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -53,5 +58,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setItem, clearItem } = productSlice.actions;
+export const { setItem, clearItem, setSelectedProduct } = productSlice.actions;
 export default productSlice.reducer;
